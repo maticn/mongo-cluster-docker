@@ -10,7 +10,11 @@ For details description, steps and discussion go to:
 # Run
 
 ```
-docker-compose -f docker-compose.1.yml -f docker-compose.2.yml  -f docker-compose.cnf.yml -f docker-compose.shard.yml up
+docker-compose -f docker-compose.1.yml -f docker-compose.2.yml  -f docker-compose.cnf.yml -f docker-compose.shard12.yml up
+```
+
+```
+docker-compose -f docker-compose.3.yml -f docker-compose.4.yml  -f docker-compose.cnf.yml -f docker-compose.shard34.yml up
 ```
 
 # Tests

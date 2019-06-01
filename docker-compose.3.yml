@@ -1,0 +1,51 @@
+version: '3'
+services:
+    mongo-3-2:
+        container_name: "mongo-3-2"
+        image: mongo:4.0.1
+        ports:
+            - "30012:27017"
+        command: mongod --replSet rs3 --shardsvr --port 27017  --oplogSize 16 --noprealloc --smallfiles
+        restart: always
+
+    mongo-3-3:
+        container_name: "mongo-3-3"
+        image: mongo:4.0.1
+        ports:
+            - "30013:27017"
+        command: mongod --replSet rs3 --shardsvr --port 27017  --oplogSize 16 --noprealloc --smallfiles
+        restart: always 
+
+    mongo-3-1:
+        container_name: "mongo-3-1"
+        image: mongo:4.0.1
+        ports:
+            - "30011:27017"
+        command: mongod --replSet rs3 --shardsvr --port 27017  --oplogSize 16 --noprealloc --smallfiles
+        links:
+            - mongo-3-2:mongo-3-2
+            - mongo-3-3:mongo-3-3
+        restart: always
+
+    mongo-rs3-setup:
+        container_name: "mongo-rs3-setup"
+        image: mongo:4.0.1
+        depends_on:
+            - "mongo-3-1"
+            - "mongo-3-2"
+            - "mongo-3-3"
+        links:
+            - mongo-3-1:mongo-3-1
+            - mongo-3-2:mongo-3-2
+            - mongo-3-3:mongo-3-3
+        volumes:
+            - ./scripts:/scripts
+            - C:/test:/datam
+        environment: 
+            - MONGO1=mongo-3-1
+            - MONGO2=mongo-3-2
+            - MONGO3=mongo-3-3
+            - RS=rs3
+        entrypoint: [ "/scripts/setup.sh" ]
+
+        
