@@ -1,6 +1,7 @@
 #!/bin/bash 
 
-mongodb1=`getent hosts ${MONGOS} | awk '{ print $1 }'`
+# mongodb1=`getent hosts ${MONGOS} | awk '{ print $1 }'`
+mongodb1="192.168.20.160"
 
 mongodb11=`getent hosts ${MONGO11} | awk '{ print $1 }'`
 mongodb12=`getent hosts ${MONGO12} | awk '{ print $1 }'`
@@ -14,7 +15,8 @@ mongodb31=`getent hosts ${MONGO31} | awk '{ print $1 }'`
 mongodb32=`getent hosts ${MONGO32} | awk '{ print $1 }'`
 mongodb33=`getent hosts ${MONGO33} | awk '{ print $1 }'`
 
-port=${PORT:-27017}
+#port=${PORT:-27017}
+port="30001"
 
 echo "Waiting for startup.."
 until mongo --host ${mongodb1}:${port} --eval 'quit(db.runCommand({ ping: 1 }).ok ? 0 : 2)' &>/dev/null; do
@@ -24,7 +26,7 @@ done
 
 echo "Started.."
 
-echo init-shard.sh time now: `date +"%T" `
+echo init-shard34.sh time now: `date +"%T" `
 mongo --host ${mongodb1}:${port} <<EOF
    sh.addShard( "${RS3}/${mongodb11}:${PORT1},${mongodb12}:${PORT2},${mongodb13}:${PORT3}" );
    sh.addShard( "${RS4}/${mongodb21}:${PORT1},${mongodb22}:${PORT2},${mongodb23}:${PORT3}" );

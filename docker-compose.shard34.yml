@@ -1,44 +1,22 @@
 version: '3'
 services:
-    mongo-router:
-        container_name: "mongo-router"
-        image: mongo:4.0.1
-        ports:
-            - "30001:27017"
-        depends_on:
-            - "mongo-rs3-setup"
-            - "mongo-rs4-setup"
-            - "mongo-cnf-setup"
-        external_links:
-            - mongo-cnf-1:mongo-cnf-1
-            - mongo-cnf-2:mongo-cnf-2
-            - mongo-cnf-3:mongo-cnf-3
-            - mongo-1-1:mongo-3-1
-            - mongo-1-2:mongo-3-2
-            - mongo-1-3:mongo-3-3
-            - mongo-2-1:mongo-4-1
-            - mongo-2-2:mongo-4-2
-            - mongo-2-3:mongo-4-3
-        command: mongos --configdb cnf-serv/mongo-cnf-1:27017,mongo-cnf-2:27017,mongo-cnf-3:27017 --port 27017 --bind_ip 0.0.0.0
-        restart: always
-
     mongo-shard-setup:
         container_name: "mongo-shard-setup34"
         image: mongo:4.0.1
-        depends_on:
-            - "mongo-router"
-        links:
-            - mongo-router:mongo-router
+        #depends_on:
+        #    - "mongo-router"
+        #links:
+        #    - mongo-router:mongo-router
         volumes:
             - ./scripts:/scripts
         environment: 
             - MONGOS=mongo-router
-            - MONGO31=mongo-3-1
-            - MONGO32=mongo-3-2
-            - MONGO33=mongo-3-3
-            - MONGO41=mongo-4-1
-            - MONGO42=mongo-4-2
-            - MONGO43=mongo-4-3
+            - MONGO11=mongo-3-1
+            - MONGO12=mongo-3-2
+            - MONGO13=mongo-3-3
+            - MONGO21=mongo-4-1
+            - MONGO22=mongo-4-2
+            - MONGO23=mongo-4-3
             - RS3=rs3
             - RS4=rs4
             - PORT=27017
