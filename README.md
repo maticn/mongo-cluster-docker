@@ -14,7 +14,7 @@ docker-compose -f docker-compose.1.yml -f docker-compose.2.yml  -f docker-compos
 ```
 
 ```
-docker-compose -f docker-compose.3.yml -f docker-compose.4.yml  -f docker-compose.cnf.yml -f docker-compose.shard34.yml up
+docker-compose -f docker-compose.3.yml -f docker-compose.4.yml -f docker-compose.shard34.yml up
 ```
 
 # Tests
