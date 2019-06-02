@@ -72,8 +72,13 @@ set cnf-serv'. It's because quite random order in `docker-compose`.
 My workaround was just to kill all containers related.
 
 ```
-docker-compose -f docker-compose.1.yml -f docker-compose.2.yml  -f docker-compose.cnf.yml -f docker-compose.shard.yml rm -f
+docker-compose -f docker-compose.1.yml -f docker-compose.2.yml -f docker-compose.cnf.yml -f docker-compose.shard12.yml rm -f
 ```
+
+```
+docker-compose -f docker-compose.3.yml -f docker-compose.4.yml -f docker-compose.shard34.yml rm -f
+```
+
 
 Please pull request. :)
 
