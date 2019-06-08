@@ -19,9 +19,13 @@ services:
             - MONGO23=mongo-4-3
             - RS3=rs3
             - RS4=rs4
-            - PORT=27017
-            - PORT1=27017
-            - PORT2=27017
-            - PORT3=27017
+            - PORT=30001
+            - PORT1=30011
+            - PORT2=30012
+            - PORT3=30013
+            - PORT4=30021
+            - PORT5=30022
+            - PORT6=30023
+
         entrypoint: [ "/scripts/init-shard34.sh" ]
         restart: on-failure:20
