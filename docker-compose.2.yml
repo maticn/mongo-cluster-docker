@@ -5,7 +5,7 @@ services:
         image: mongo:4.0.1
         ports:
             - "30022:27017"
-        command: mongod --replSet rs2 --shardsvr --port 27017  --oplogSize 16 --noprealloc --smallfiles
+        command: mongod --replSet rs2 --shardsvr --port 27017 --dbpath /data/db --oplogSize 16 --noprealloc --smallfiles
         restart: always
 
     mongo-2-3:
@@ -13,7 +13,7 @@ services:
         image: mongo:4.0.1
         ports:
             - "30023:27017"
-        command: mongod --replSet rs2 --shardsvr --port 27017  --oplogSize 16 --noprealloc --smallfiles
+        command: mongod --replSet rs2 --shardsvr --port 27017 --dbpath /data/db --oplogSize 16 --noprealloc --smallfiles
         restart: always 
 
     mongo-2-1:
@@ -21,7 +21,7 @@ services:
         image: mongo:4.0.1
         ports:
             - "30021:27017"
-        command: mongod --replSet rs2 --shardsvr --port 27017  --oplogSize 16 --noprealloc --smallfiles
+        command: mongod --replSet rs2 --shardsvr --port 27017 --dbpath /data/db --oplogSize 16 --noprealloc --smallfiles
         links:
             - mongo-2-2:mongo-2-2
             - mongo-2-3:mongo-2-3
@@ -40,6 +40,7 @@ services:
             - mongo-2-3:mongo-2-3
         volumes:
             - ./scripts:/scripts
+            - ./datars2:/data/db
         environment: 
             - MONGO1=mongo-2-1
             - MONGO2=mongo-2-2
